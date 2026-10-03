@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="منصة المستقبل التعليمية - دروس ومراجعات وأسئلة للطلاب">
+<meta name="robots" content="index,follow">
+<title>منصة المستقبل التعليمية</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f4f7fb;color:#172033}
+header{background:linear-gradient(135deg,#123b65,#1681b8);color:white;padding:16px 4%;display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:5;box-shadow:0 4px 15px #0002}
+.brand{text-align:center;flex:1}.brand h1{margin:0;font-size:24px}.brand p{margin:4px 0 0;font-size:12px;opacity:.85}.side{font-size:13px;font-weight:bold}
+main{max-width:1100px;margin:auto;padding:25px 15px}.screen{display:none}.screen.active{display:block}
+.hero,.content,.question{background:white;border-radius:18px;padding:22px;box-shadow:0 6px 22px #00000010;margin-bottom:18px}
+.hero h2,.content h2,.content h3{color:#123b65}.hero h2{margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.card,.lesson{width:100%;text-align:right;border:0;background:white;border-radius:17px;padding:18px;cursor:pointer;box-shadow:0 5px 18px #00000010;transition:.2s}
+.card:hover,.lesson:hover{transform:translateY(-3px)}button:focus-visible{outline:3px solid #f0b429;outline-offset:2px}
+.icon{font-size:31px}.card h3{margin:8px 0;color:#123b65}.tag{display:inline-block;background:#e9f5ff;color:#14618f;padding:5px 9px;border-radius:20px;font-size:12px}
+.back,.primary{border:0;border-radius:11px;padding:11px 16px;cursor:pointer;font-weight:bold}.back{background:white;color:#123b65;box-shadow:0 3px 12px #0001;margin-bottom:15px}.primary{background:#123b65;color:white}
+.subject-head{background:linear-gradient(135deg,#123b65,#1681b8);color:white;border-radius:18px;padding:22px;margin-bottom:18px}.subject-head h2{margin:0 0 7px}.subject-head p{margin:0;line-height:1.8}
+.lesson{display:flex;gap:14px;align-items:center}.num{min-width:42px;height:42px;border-radius:50%;background:#e9f5ff;color:#12608f;display:grid;place-items:center;font-weight:bold}
+.content{line-height:2}.content li{margin:7px 0}.note{background:#fff6d9;border-right:4px solid #e2a400;padding:12px;border-radius:9px}
+.question{margin-bottom:14px}.option{display:block;padding:8px;margin:5px 0;border-radius:8px;cursor:pointer}.option:hover{background:#f1f5f8}
+.result{padding:16px;background:#e8f7ec;border-radius:12px;margin-top:15px;font-weight:bold}
+footer{text-align:center;color:#748094;padding:25px;font-size:12px}
+@media(max-width:600px){.brand h1{font-size:18px}.side{font-size:10px}}
+</style>
+</head>
+<body>
+<header>
+<div class="side">01061771293</div>
+<div class="brand"><h1>منصة المستقبل التعليمية</h1><p>تعلم • راجع • اختبر نفسك</p></div>
+<div class="side">كريم محمود حسين</div>
+</header>
+
+<main>
+<section id="home" class="screen active">
+<div class="hero"><h2>أهلاً بكم طلابنا 👋</h2><p>كل المواد موجودة هنا. اضغط على أي مادة لفتح الدروس والشرح وأهم النقاط والاختبار.</p></div>
+<h3>📚 المواد الأساسية</h3><div id="core" class="grid"></div>
+<h3>🎓 مواد التخصص والمراجعة</h3><div id="special" class="grid"></div>
+</section>
+
+<section id="subject" class="screen">
+<button class="back" data-action="home">← العودة للمواد</button>
+<div id="subjectHead"></div><h3>الدروس والوحدات</h3><div id="lessons" class="grid"></div>
+<br><button class="primary" data-action="quiz">📝 اختبار المادة — 10 أسئلة</button>
+</section>
+
+<section id="lesson" class="screen">
+<button class="back" data-action="subject">← العودة للمادة</button>
+<div id="lessonBody"></div>
+</section>
+
+<section id="quiz" class="screen">
+<button class="back" data-action="subject">← العودة للمادة</button>
+<div class="hero"><h2 id="quizTitle"></h2><p>اختار إجابة لكل سؤال ثم اضغط تصحيح.</p></div>
+<form id="quizForm"></form>
+<button class="primary" data-action="submit">تصحيح الاختبار</button>
+<div id="result"></div>
+</section>
+</main>
+<footer>© 2026 منصة المستقبل التعليمية</footer>
+
+<script>
+const data={
+arabic:{t:"اللغة العربية",i:"📚",tag:"أساسية",lessons:[
+["فهم المقروء وبناء الفكرة","ابدأ بتحديد الفكرة العامة ثم الأفكار الفرعية والأدلة. لا تعتمد على الانطباع؛ ارجع إلى النص عند كل إجابة.","الفكرة العامة تلخص النص كله.","الفكرة الجزئية ترتبط بجزء محدد.","ارجع للنص قبل اختيار الإجابة."],
+["النحو وعلامات الإعراب","حدد نوع الجملة ثم وظيفة كل كلمة. في الجملة الاسمية نبحث عن المبتدأ والخبر، وفي الفعلية نحدد الفعل والفاعل والمفعول به.","المبتدأ والخبر مرفوعان في الأصل.","الفاعل مرفوع.","المفعول به منصوب.","الاسم بعد حرف الجر مجرور."],
+["البلاغة","التشبيه مقارنة بين شيئين، والاستعارة نقل للفظ إلى معنى غير أصله، والكناية تعبير يقصد به معنى ملازم.","التشبيه يوضح الصفة.","الاستعارة تعتمد على نقل المعنى.","الكناية تحتاج فهم المعنى المقصود."],
+["الكتابة والتعبير","اكتب مقدمة واضحة، ثم أفكارًا مرتبة، ثم خاتمة مناسبة. استخدم أدوات الربط وراجع الإملاء والترقيم.","حدد المطلوب.","رتب الأفكار.","استخدم أمثلة.","راجع قبل التسليم."]
+]},
+english:{t:"اللغة الإنجليزية",i:"🇬🇧",tag:"اللغة الأجنبية الأولى",lessons:[
+["Unit 1 — Vocabulary","Learn words in context. كلمات مهمة: achieve = يحقق، challenge = تحدٍ، improve = يحسن، opportunity = فرصة، decision = قرار، experience = خبرة/تجربة.","Learn words inside sentences.","Review vocabulary regularly.","Use context to guess meaning."],
+["Unit 1 — Grammar","Present Simple للحقائق والعادات: I study every day. Present Continuous لما يحدث الآن: I am studying now.","انتبه للكلمات الدالة على الزمن.","اقرأ الجملة كاملة قبل الاختيار.","راجع تصريف الفعل."],
+["Unit 1 — Reading & Writing","في القراءة ابحث عن العنوان والكلمات المفتاحية. في الكتابة: Topic sentence ثم تفاصيل داعمة ثم خاتمة.","اقرأ السؤال أولًا.","استخدم because وhowever وalso وfinally.","راجع spelling وpunctuation."]
+]},
+history:{t:"التاريخ المصري",i:"🏺",tag:"أساسية",lessons:[
+["تحليل الأحداث","افهم العلاقة بين السبب والحدث والنتيجة، وحدد الشخصيات والظروف المحيطة.","السبب يفسر لماذا وقع الحدث.","النتيجة توضح ما ترتب عليه.","رتب الأحداث زمنيًا."],
+["تحليل المصادر","حدد صاحب المصدر وزمنه ونوعه، ثم استخرج ما يوضحه وحدوده.","فرّق بين المعلومة والرأي.","قارن المصادر عند الحاجة.","اهتم بالسياق التاريخي."],
+["المقارنة التاريخية","حدد معيار المقارنة ثم اذكر أوجه التشابه والاختلاف المرتبطة بالمطلوب.","حدد عنصر المقارنة.","لا تضف معلومات بعيدة عن السؤال.","استخدم أمثلة مناسبة."]
+]},
+physics:{t:"الفيزياء",i:"⚡",tag:"تخصصية",lessons:[
+["القياس والوحدات","اكتب المعطيات والمطلوب ووحّد الوحدات قبل التعويض في القانون.","اكتب الوحدة مع الرقم.","تحقق من منطق الناتج.","حدد الاتجاه عند الحاجة."],
+["الحركة والقوة","الحركة تصف تغير الموضع مع الزمن، والقوة كمية لها مقدار واتجاه وقد تغير حالة الحركة.","ارسم مخططًا عند الحاجة.","حدد الاتجاه الموجب.","اكتب القانون قبل التعويض."],
+["الشغل والطاقة","الشغل يرتبط بانتقال جسم تحت تأثير قوة، والطاقة مرتبطة بالقدرة على إحداث تغيير.","حدد النظام.","راجع الوحدات.","فسر الناتج."]
+]},
+math:{t:"الرياضيات",i:"📐",tag:"تخصصية",lessons:[
+["الدوال والعلاقات","الدالة تربط كل عنصر من المجال بعنصر واحد في المدى. اهتم بالمجال والمدى وقيمة الدالة.","حدد المجال.","اكتب التعويض بوضوح.","راجع القيود."],
+["المعادلات والمتباينات","بسّط الطرفين وحافظ على التكافؤ. عند الضرب أو القسمة في عدد سالب داخل متباينة تتغير جهة العلامة.","اختبر الحل.","اكتب الخطوات.","راجع الإشارة."],
+["الهندسة والتحليل","استخدم الرسم لتحديد المعطيات ثم اختر العلاقة الهندسية المناسبة.","حدد المعطيات.","اكتب القانون.","راجع الوحدة."]
+]},
+chemistry:{t:"الكيمياء",i:"🧪",tag:"تخصصية",lessons:[
+["خواص المادة","الخاصية الفيزيائية يمكن ملاحظتها دون تغيير هوية المادة، أما الكيميائية فترتبط بقدرتها على تكوين مواد جديدة.","فرّق بين التغيرين.","اربط الخاصية بالتركيب.","استخدم المصطلح بدقة."],
+["التفاعلات الكيميائية","المعادلة الموزونة تحقق حفظ عدد ذرات كل عنصر. نغيّر المعاملات ولا نغيّر الصيغ نفسها.","اكتب الصيغ الصحيحة.","وازن بالمعاملات.","تحقق من الذرات."],
+["الحسابات الكيميائية","حدد المعطيات والمطلوب والوحدات ثم اختر العلاقة المناسبة وتحقق من الناتج.","وحّد الوحدات.","اكتب الخطوات.","راجع الوحدة."]
+]},
+programming:{t:"البرمجة والذكاء الاصطناعي",i:"💻",tag:"تخصصية",lessons:[
+["أساسيات البرمجة","البرنامج تعليمات منظمة. من الأفكار الأساسية المتغيرات والبيانات والشروط والحلقات.","المتغير يخزن قيمة.","الشرط لاتخاذ قرار.","الحلقة للتكرار."],
+["الخوارزميات","الخوارزمية خطوات مرتبة لحل مشكلة. حدد المدخلات والمخرجات قبل كتابة الكود.","افهم المشكلة.","اكتب الخطوات.","اختبر حالات مختلفة."],
+["الذكاء الاصطناعي","يعتمد كثير من تطبيقات الذكاء الاصطناعي على البيانات والنماذج والتدريب والتقييم.","جودة البيانات مهمة.","التقييم يقيس الأداء.","لا تعتمد على نتيجة دون فحصها."]
+]},
+accounting:{t:"المحاسبة",i:"🧾",tag:"تخصصية",lessons:[
+["مفهوم المحاسبة","المحاسبة تسجل وتصنف وتلخص المعلومات المالية لمساعدة المستخدمين على فهم النشاط المالي.","التسجيل منظم.","التصنيف يجمع العمليات.","التقارير تلخص المعلومات."],
+["المعادلة المحاسبية","الأصول = الالتزامات + حقوق الملكية. كل عملية تؤثر في العناصر مع بقاء التوازن.","الأصول موارد.","الالتزامات حقوق للغير.","حقوق الملكية حق المالك."],
+["التسجيل والمراجعة","حدد الحسابات المتأثرة وطبيعة الزيادة أو النقص قبل إجراء القيد.","حدد الحسابات.","افهم طبيعة كل حساب.","راجع التوازن."]
+]},
+business:{t:"إدارة الأعمال",i:"📊",tag:"تخصصية",lessons:[
+["وظائف الإدارة","التخطيط والتنظيم والتوجيه والرقابة وظائف مترابطة لتحقيق أهداف المؤسسة.","التخطيط يحدد الأهداف.","التنظيم يوزع الموارد.","الرقابة تقارن النتائج بالأهداف."],
+["اتخاذ القرار","حدد المشكلة، اجمع المعلومات، ضع بدائل، قارنها، ثم نفذ وتابع النتيجة.","قارن البدائل بمعايير واضحة.","تابع النتائج.","تعلم من التغذية الراجعة."],
+["العمل الجماعي","الفريق يحتاج هدفًا واضحًا وأدوارًا محددة وتواصلًا فعالًا.","وضح المسؤوليات.","حافظ على التواصل.","استخدم التغذية الراجعة."]
+]},
+psychology:{t:"علم النفس",i:"🧠",tag:"تخصصية",lessons:[
+["مقدمة في علم النفس","يدرس علم النفس السلوك والعمليات العقلية بطرق منظمة، مع التمييز بين الملاحظة العلمية والانطباع الشخصي.","السلوك يمكن ملاحظته.","التفكير والانتباه والتذكر عمليات عقلية.","المنهج العلمي مهم."],
+["التعلم والذاكرة","التعلم يرتبط بالخبرة والتدريب، والذاكرة تشمل الترميز والتخزين والاسترجاع.","المراجعة المتباعدة مفيدة.","الاسترجاع النشط يساعد التذكر.","اربط الجديد بالقديم."],
+["الدافعية وإدارة الوقت","الدافعية تساعد على البدء والاستمرار. تقسيم الهدف الكبير إلى خطوات صغيرة يجعل التنفيذ أسهل.","حدد هدفًا واضحًا.","قسم المهمة.","تابع التقدم."]
+]},
+second:{t:"اللغة الأجنبية الثانية",i:"🌍",tag:"تخصصية",lessons:[
+["المفردات والتواصل","ابدأ بالكلمات اليومية والتحيات والأرقام والوقت والدراسة، واحفظ الكلمة داخل جملة.","تعلم النطق.","راجع دوريًا.","استخدم جملًا قصيرة."],
+["القواعد الأساسية","ابدأ بتركيب الجملة ثم تصريف الفعل والضمائر وأدوات السؤال والنفي بحسب اللغة التي تدرسها.","احفظ النمط مع مثال.","تدرب على أمثلة.","راجع الأخطاء."],
+["القراءة والكتابة","في القراءة ابحث عن الفكرة والكلمات المفتاحية. في الكتابة رتب الأفكار واستخدم جملًا واضحة.","اقرأ السؤال أولًا.","حدد الكلمات المفتاحية.","راجع الكتابة."]
+]}
+};
+
+const core=["arabic","english","history"], special=["physics","math","chemistry","programming","accounting","business","psychology","second"];
+let current=null;
+
+function card(id){let s=data[id];return `<button class="card" data-subject="${id}"><span class="icon">${s.i}</span><h3>${s.t}</h3><span class="tag">${s.tag}</span><p>اضغط لفتح الدروس والشرح والأسئلة</p></button>`}
+document.getElementById("core").innerHTML=core.map(card).join("");
+document.getElementById("special").innerHTML=special.map(card).join("");
+
+function show(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");scrollTo(0,0)}
+function openSubject(id){
+ current=id;let s=data[id];
+ document.getElementById("subjectHead").innerHTML=`<div class="subject-head"><h2>${s.i} ${s.t}</h2><p>${s.tag} — اختر أي درس لفتح الشرح وأهم النقاط.</p></div>`;
+ document.getElementById("lessons").innerHTML=s.lessons.map((l,i)=>`<button class="lesson" data-lesson="${i}"><span class="num">${i+1}</span><span><b>${l[0]}</b><br>اضغط لفتح الدرس</span></button>`).join("");
+ show("subject");
+}
+function openLesson(i){
+ let l=data[current].lessons[i];
+ document.getElementById("lessonBody").innerHTML=`<div class="content"><h2>${l[0]}</h2><p>${l[1]}</p><h3>⭐ أهم النقاط</h3><ul>${l.slice(2).map(x=>`<li>${x}</li>`).join("")}</ul><button class="primary" data-action="quiz">📝 حل 10 أسئلة</button></div>`;
+ show("lesson");
+}
+function startQuiz(){
+ let s=data[current], qs=Array.from({length:10},(_,i)=>({q:`${i+1}. أي عبارة مرتبطة بدراسة ${s.t}؟`,a:["مراجعة المفاهيم الأساسية وفهمها","تجاهل الشرح","حفظ الإجابة دون فهم","عدم مراجعة الحل"],ok:0}));
+ document.getElementById("quizTitle").textContent=`اختبار ${s.t}`;
+ document.getElementById("quizForm").innerHTML=qs.map((q,i)=>`<div class="question"><b>${q.q}</b>${q.a.map((x,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}"> ${x}</label>`).join("")}</div>`).join("");
+ document.getElementById("result").innerHTML="";show("quiz");
+}
+function submitQuiz(){
+ let score=0;for(let i=0;i<10;i++){let x=document.querySelector(`input[name=q${i}]:checked`);if(x&&x.value==="0")score++}
+ document.getElementById("result").innerHTML=`<div class="result">نتيجتك: ${score}/10 — ${score>=8?"ممتاز 👏":"راجع الدروس وحاول مرة أخرى 💪"}</div>`;
+}
+document.addEventListener("click",e=>{
+ let s=e.target.closest("[data-subject]");if(s){openSubject(s.dataset.subject);return}
+ let l=e.target.closest("[data-lesson]");if(l){openLesson(+l.dataset.lesson);return}
+ let a=e.target.closest("[data-action]");if(!a)return;
+ if(a.dataset.action==="home")show("home");
+ if(a.dataset.action==="subject")openSubject(current);
+ if(a.dataset.action==="quiz")startQuiz();
+ if(a.dataset.action==="submit")submitQuiz();
+});
+</script>
+</body>
+</html>
